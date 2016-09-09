@@ -1,1 +1,1 @@
-# EmoMe
+The application will predict the face details out of an image uploaded. The items that will be predicated are : Age, Gender, Pose, Smile, Facial Hair and glasses. This will be done for each face in the uploaded image. The image can have a maximum of 64 faces in it. The application would also detect the emotions out of the detected faces. The emotions that would be detected are  anger, contempt, disgust, fear, happiness, neutral, sadness, surprise, etc. The emotions would be expressed as percentage. 

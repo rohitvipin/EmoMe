@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:EmoMe.Common;assembly=EmoMe"
+              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="EmoMe.Views.HomeView"
+             Title="{Binding PageTitle}"
+             BackgroundColor="{x:Static common:Colors.DarkPurpleColor}">
+
+  <StackLayout VerticalOptions="FillAndExpand">
+
+    <!--List of Images below with name and description-->
+
+    <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding ImageDetails}" HasUnevenRows="true" BackgroundColor="{x:Static common:Colors.DarkPurpleColor}" >
+
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+
+            <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
+              <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SelectImageDetailCommand}" />
+              </Grid.GestureRecognizers>
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+
+              <forms:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions ="CenterAndExpand"
+                     Aspect="AspectFill" Source="{Binding ImageSource}" HeightRequest="64" WidthRequest="64">
+                <forms:CachedImage.Transformations>
+                  <fftransformations:CornersTransformation />
+                  <fftransformations:CircleTransformation/>
+                </forms:CachedImage.Transformations>
+              </forms:CachedImage>
+
+              <Label Grid.Row="0" Grid.Column="1" Text="{Binding Title}" TextColor="{x:Static common:Colors.DarkGrayColor}" VerticalOptions="End"/>
+
+              <Label Grid.Column="1" Grid.Row="1" VerticalOptions="Start" Text="{Binding Description}" TextColor="{x:Static common:Colors.CelloColor}"/>
+
+            </Grid>
+
+          </ViewCell>
+
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+    <StackLayout VerticalOptions="End" Orientation="Horizontal" Padding="0" Spacing="0" HeightRequest="48">
+
+      <!--Filter button-->
+      <Button HorizontalOptions="FillAndExpand" VerticalOptions="Fill" BackgroundColor="{x:Static common:Colors.LightPurpleColor}"
+              BorderRadius="0" Image="filter.png" Command="{Binding FilterPhotoListCommand}"/>
+
+      <!--Camera button-->
+      <Button HorizontalOptions="FillAndExpand" VerticalOptions="Fill" BackgroundColor="{x:Static common:Colors.LightBlueColor}"
+              BorderRadius="0" Image="camera.png" Command="{Binding TakePhotoCommand}"/>
+
+      <!--Pick image from gallery button-->
+      <Button HorizontalOptions="FillAndExpand" VerticalOptions="Fill" BackgroundColor="{x:Static common:Colors.LightYellowColor}"
+              BorderRadius="0" Image="gallery.png" Command="{Binding PickPhotoCommand}"/>
+
+    </StackLayout>
+
+  </StackLayout>
+
+</ContentPage>

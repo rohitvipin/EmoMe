@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:EmoMe.Common;assembly=EmoMe"
+             xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:converter="clr-namespace:EmoMe.Common.Converters;assembly=EmoMe"
+             x:Class="EmoMe.Views.ImageDetailView"
+             Title="{Binding PageTitle}"
+             BackgroundColor="{x:Static common:Colors.DarkPurpleColor}">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>    
+      <converter:ZeroToBoolConverter x:Key="ZeroToBoolConverter" />
+      </ResourceDictionary>
+    </ContentPage.Resources>
+  
+  <ScrollView>
+    <StackLayout VerticalOptions="Start" Padding="2" Spacing="2">
+      
+      <ffImageLoading:CachedImage HorizontalOptions="FillAndExpand" WidthRequest="375" HeightRequest="306" VerticalOptions ="Start" Aspect="AspectFit" Source="{Binding ImageDetails.Image.ImageSource}">
+      <ffImageLoading:CachedImage.Transformations>
+				<fftransformations:CornersTransformation/>
+			</ffImageLoading:CachedImage.Transformations>
+      </ffImageLoading:CachedImage>
+
+      <ListView ItemsSource="{Binding ImageDetails.Faces}" BackgroundColor="{x:Static common:Colors.DarkPurpleColor}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HasUnevenRows="True">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Padding="2" Spacing="2">
+                <Label HorizontalOptions="FillAndExpand" VerticalOptions="Start" Text="Face Detection" FontSize="Large" TextColor="{x:Static common:Colors.DarkGrayColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                <StackLayout HorizontalOptions="FillAndExpand"  VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Age" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding FaceAttributes.Age}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"  />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Gender" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding FaceAttributes.Gender}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"  />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Smile" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding FaceAttributes.Smile, StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"  />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Glasses" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding FaceAttributes.Glasses}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"  />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="HeadPose" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding FaceAttributes.HeadPose}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"  />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="FacialHair" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding FaceAttributes.FacialHair}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"  />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <Label HorizontalOptions="FillAndExpand" Text="Emotions" FontSize="Large" FontFamily="" TextColor="{x:Static common:Colors.DarkGrayColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" IsVisible="{Binding  Emotions.Anger, Converter={StaticResource ZeroToBoolConverter}}" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Anger" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding Emotions.Anger, StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" IsVisible="{Binding  Emotions.Anger, Converter={StaticResource ZeroToBoolConverter}}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" IsVisible="{Binding  Emotions.Contempt, Converter={StaticResource ZeroToBoolConverter}}" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Contempt" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding Emotions.Contempt, StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" IsVisible="{Binding  Emotions.Contempt, Converter={StaticResource ZeroToBoolConverter}}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" IsVisible="{Binding  Emotions.Disgust, Converter={StaticResource ZeroToBoolConverter}}" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Disgust" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding Emotions.Disgust , StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" IsVisible="{Binding  Emotions.Disgust, Converter={StaticResource ZeroToBoolConverter}}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" IsVisible="{Binding  Emotions.Fear, Converter={StaticResource ZeroToBoolConverter}}" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Fear" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding Emotions.Fear , StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" IsVisible="{Binding  Emotions.Fear, Converter={StaticResource ZeroToBoolConverter}}"  HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" IsVisible="{Binding  Emotions.Happiness, Converter={StaticResource ZeroToBoolConverter}}" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Happiness" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding Emotions.Happiness, StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" IsVisible="{Binding  Emotions.Happiness, Converter={StaticResource ZeroToBoolConverter}}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" IsVisible="{Binding  Emotions.Neutral, Converter={StaticResource ZeroToBoolConverter}}" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Neutral" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding Emotions.Neutral, StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" IsVisible="{Binding  Emotions.Neutral, Converter={StaticResource ZeroToBoolConverter}}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" IsVisible="{Binding  Emotions.Sadness, Converter={StaticResource ZeroToBoolConverter}}" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Sadness" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding Emotions.Sadness, StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout BackgroundColor="{x:Static common:Colors.CelloColor}" IsVisible="{Binding  Emotions.Sadness, Converter={StaticResource ZeroToBoolConverter}}" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"></StackLayout>
+
+                <StackLayout  HorizontalOptions="FillAndExpand" IsVisible="{Binding  Emotions.Surprise, Converter={StaticResource ZeroToBoolConverter}}" VerticalOptions="Start" Padding="5" Orientation="Horizontal" Spacing="2">
+                  <Label Text="Surprise" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                  <Label HorizontalOptions="EndAndExpand" Text="{Binding Emotions.Surprise, StringFormat='{0} %'}" TextColor="{x:Static common:Colors.OpiumColor}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                </StackLayout>
+              
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+
+    </StackLayout></ScrollView>
+</ContentPage>

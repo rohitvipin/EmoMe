@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:EmoMe.Common;assembly=EmoMe"
+             xmlns:customControls="clr-namespace:EmoMe.CustomControls;assembly=EmoMe"
+             x:Class="EmoMe.Views.ImageFilterView"
+             BackgroundColor="White">
+
+  <StackLayout VerticalOptions="FillAndExpand">
+
+    <ListView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ItemsSource="{Binding ImageFilterEnities}" HasUnevenRows="true" BackgroundColor="White" Margin="20, 0, 20, 0">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Padding="5">
+
+              <Label Text="{Binding FilterName}" TextColor="{x:Static common:Colors.CelloColor}" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+
+              <customControls:CustomCheckbox HorizontalOptions="End" VerticalOptions="Center" Checked="{Binding IsSelected}" HeightRequest="30" WidthRequest="30" />
+
+            </StackLayout>
+
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+    <Button HorizontalOptions="FillAndExpand" VerticalOptions="End" Text="Done" BackgroundColor="{x:Static common:Colors.LimeadeColor}" TextColor="White"
+                 Command="{Binding DoneCommand}"/>
+
+  </StackLayout>
+
+</ContentPage>
